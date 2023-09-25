@@ -25,9 +25,18 @@ javascript:
  * SOFTWARE. */
 
 (function () {
+    var deleteCount = 0; // Initialize a counter
+
     var delTweets = function () {
         var tweetsRemaining = document.querySelectorAll('[role="heading"]+div')[1].textContent;
         console.log('Remaining: ', tweetsRemaining);
+
+        // Check if we've deleted 100 tweets
+        if (deleteCount >= 100) {
+            console.log('Deleted 100 tweets. Stopping execution.');
+            return;
+        }
+
         window.scrollBy(0, 10000);
         document.querySelectorAll('[aria-label="More"]').forEach(function (v, i, a) {
             v.click();
@@ -37,14 +46,17 @@ javascript:
                     document.querySelectorAll('[data-testid="confirmationSheetConfirm"]').forEach(function (v3, i3, a3) {
                         v3.click();
                     });
+                    deleteCount++; // Increment the counter after a tweet is deleted
                 }
                 else {
                     document.body.click();
                 }
             });
         });
+
         setTimeout(delTweets, 0);
     };
 
     delTweets();
 })();
+
