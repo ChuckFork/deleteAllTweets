@@ -25,28 +25,28 @@ javascript:
  * SOFTWARE. */
 
 (function () {
-    var deleteCount = 0; // Initialize a counter
+    var tweetsDeleted = 0; // Initialize a counter for deleted tweets
 
-    var delTweets = function () {
-        var tweetsRemaining = document.querySelectorAll('[role="heading"]+div')[1].textContent;
-        console.log('Remaining: ', tweetsRemaining);
+    var deleteTweets = function () {
+        var remainingTweets = document.querySelectorAll('[role="heading"]+div')[1].textContent;
+        console.log('Remaining: ', remainingTweets);
 
         // Check if we've deleted 100 tweets
-        if (deleteCount >= 100) {
+        if (tweetsDeleted >= 100) {
             console.log('Deleted 100 tweets. Stopping execution.');
             return;
         }
 
         window.scrollBy(0, 10000);
-        document.querySelectorAll('[aria-label="More"]').forEach(function (v, i, a) {
-            v.click();
-            document.querySelectorAll('span').forEach(function (v2, i2, a2) {
-                if (v2.textContent === 'Delete') {
-                    v2.click();
-                    document.querySelectorAll('[data-testid="confirmationSheetConfirm"]').forEach(function (v3, i3, a3) {
-                        v3.click();
+        document.querySelectorAll('[aria-label="More"]').forEach(function (menu, index, array) {
+            menu.click();
+            document.querySelectorAll('span').forEach(function (action, index2, array2) {
+                if (action.textContent === 'Delete') {
+                    action.click();
+                    document.querySelectorAll('[data-testid="confirmationSheetConfirm"]').forEach(function (confirm, index3, array3) {
+                        confirm.click();
                     });
-                    deleteCount++; // Increment the counter after a tweet is deleted
+                    tweetsDeleted++; // Increment the counter after a tweet is deleted
                 }
                 else {
                     document.body.click();
@@ -54,9 +54,10 @@ javascript:
             });
         });
 
-        setTimeout(delTweets, 0);
+        setTimeout(deleteTweets, 0);
     };
 
-    delTweets();
+    deleteTweets();
 })();
+
 
