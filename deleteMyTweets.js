@@ -46,6 +46,7 @@ javascript:
                     action.click();
                     document.querySelectorAll('[data-testid="confirmationSheetConfirm"]').forEach(function (confirm, index3, array3) {
                         confirm.click();
+                        console.log(tweetsDeleted + ' delete button clicked.');
                     });
                     tweetsDeleted++; // Increment the counter after a tweet is deleted
                 }
