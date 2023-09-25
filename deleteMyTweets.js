@@ -25,12 +25,12 @@ javascript:
  * SOFTWARE. */
 
 (function () {
-    var tweetsToDelete = 100; // Set the number of tweets to delete
+    var tweetsToDelete = 20; // Set the number of tweets to delete
     var tweetsDeleted = 0; // Initialize a counter for deleted tweets
 
     var deleteTweets = function () {
-        var remainingTweets = document.querySelectorAll('[role="heading"]+div')[1].textContent;
-        console.log('Remaining: ', remainingTweets);
+        var tweetsRemaining = document.querySelectorAll('[role="heading"]+div')[1].textContent;
+        console.log('Deleted: ' + tweetsDeleted + ', Remaining: ' + tweetsRemaining);
 
         // Check if we've deleted the desired number of tweets
         if (tweetsDeleted >= tweetsToDelete) {
