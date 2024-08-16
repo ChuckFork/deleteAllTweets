@@ -17,9 +17,16 @@ async function removeAll() {
         next.focus()
         next.click()
 
-        confirm=confirmUnreweet();
-        confirm.focus();
-        confirm.click();
+        // Wait for the confirmation dialog to appear
+        await wait(500);// Adjust the delay if necessary
+        
+        let confirm = confirmUnreweet();
+        if (confirm) {
+            confirm.focus();
+            confirm.click();
+        } else {
+            console.warn("Confirm button not found");
+        }
 
         console.log(`Unretweet ${++count} tweets`)
         await wait(count % 50 === 0 ? 30000 : 2000)
